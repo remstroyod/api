@@ -1,5 +1,32 @@
 # API Articles
 
+____
+
+### Инструкция подключения
+____
+
+###### 1. Папка с модулем
+
+```
+Помеcтить папку "api" в корень темы в папку "classes".
+
+Пример:
+https://domain.com/wp-content/themes/{THEME_NAME}/classes/api
+```
+____
+###### 2. Подключение модуля
+```php
+/**
+ * Вставить эту строку в файл functions.php
+ * Файл functions.php находится в корне темы: https://domain.com/wp-content/themes/functions.php
+ * 
+ */
+require get_template_directory() . '/classes/api/CustomAPI.php';
+```
+____
+Описание запросов
+-----------
+**Метод GET**
 ```php
 https://domain.com/wp-json/api/v1/articles/?key=value
 ```
@@ -12,56 +39,39 @@ https://domain.com/wp-json/api/v1/articles/?key=value
 | limit     | integer    | Лимит записей |
 | readerId     | integer    | ID пользователя, для того, что бы отсеять записи, которые он просмотрел |
 | viewed     | integer    | Показать записи, которые пользователь смотрел (true / false) |
+| createdFrom     | integer    | Дата от (Unix - time()) |
+| createdTo     | integer    | Дата до (Unix - time()) |
 ```json
-{
-  "code": "success",
-  "message": "",
-  "data": {
-    "status": 200,
-    "response": [{
-      "id": 12,
-      "title": "Article Three",
-      "subtitle": "Article",
-      "tags": [
-        {
-          "term_id": 7,
-          "name": "great",
-          "slug": "great",
-          "term_group": 0,
-          "term_taxonomy_id": 7,
-          "taxonomy": "post_tag",
-          "description": "",
-          "parent": 0,
-          "count": 1,
-          "filter": "raw"
-        },
-        {
-          "term_id": 8,
-          "name": "perfect",
-          "slug": "perfect",
-          "term_group": 0,
-          "term_taxonomy_id": 8,
-          "taxonomy": "post_tag",
-          "description": "",
-          "parent": 0,
-          "count": 5,
-          "filter": "raw"
-        }
-      ],
-      "imageUrl": "https://domain.com/wp-content/uploads/2021/06/mirastar-boxes-img-1.jpg",
-      "articleUrl": "https://domain.com/app/api/v1/article/article-three/",
-      "articleSlug": "article-three",
-      "viewed": 0,
-      "createdAt": "2021-06-01 08:12:51"
-    }]
+[
+  {
+    "id": "26",
+    "title": "Article Five",
+    "subtitle": "Five",
+    "tags": [
+      "tour"
+    ],
+    "imageUrl": "https://domain.com/wp-content/uploads/2021/06/mirastar-boxes-img-1.jpg",
+    "articleUrl": "https://domain.com/app/api/v1/article/article-five/",
+    "viewed": false,
+    "createdAt": 1622623317
+  },
+  {
+    "id": "18",
+    "title": "Article Seven",
+    "subtitle": "Seven",
+    "tags": [
+      "tour"
+    ],
+    "imageUrl": "https://domain.com/wp-content/uploads/2021/06/mirastar-boxes-img-1.jpg",
+    "articleUrl": "https://domain.com/app/api/v1/article/article-seven/",
+    "viewed": false,
+    "createdAt": 1622621735
+  },
+  {
+    ...
   }
-},
-{
-...
-}
+]
 ```
-
-
 
 ```php
 https://domain.com/app/api/v1/article/{articleSlug}/?readerId=ID
@@ -76,29 +86,7 @@ https://domain.com/app/api/v1/article/{articleSlug}/?readerId=ID
 <!-- Article -->
 <div class="app_article">
 
-    <!-- Article > Single -->
-    <div class="app_article__single">
-
-        <!-- Title -->
-        <h1 class="app_article__title">
-            Article Title
-        </h1>
-        <!-- End Title -->
-
-        <!-- Image -->
-        <div class="app_article__image">
-            <img src="https://domain.com/wp-content/uploads/2021/06/mirastar-boxes-img-1.jpg" alt="" title="" />
-        </div>
-        <!-- End Image -->
-
-        <!-- Text -->
-        <div class="app_article__text">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
-        </div>
-        <!-- End Text -->
-
-    </div>
-    <!-- End Article > Single -->
+    Your html
 
 </div>
 <!-- End Article -->
