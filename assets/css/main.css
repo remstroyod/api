@@ -1,0 +1,302 @@
+body {
+    margin: 0 0;
+    padding: 1px 0 0;
+
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+p:last-child {
+    margin-bottom: 0;
+}
+
+
+.app_article {
+    padding: 1px 0 0;
+}
+
+
+/* base article */
+.app_article__suggesting-reading-tags {
+    padding: 62px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.app_article__suggesting-reading-tag {
+    margin: 10px !important;
+    padding: 2.5px 6px;
+    background: #A5ABEC;
+    border-radius: 2px;
+    color: #fff;
+    /* font-family: 'Nunito Sans', sans-serif; */
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 14px;
+    /* identical to box height */
+    text-align: center;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+
+.app_article__intro {
+    background-image: linear-gradient( 140.6deg , #F4FAFC 37.58%, #DAF5FD 84.8%, #D8E5FF 126.91%);
+    background-size: 100% 99%;
+    background-repeat: no-repeat;
+}
+.app_article__intro-title {
+    padding: 10px 15px;
+    margin: 0;
+    /* font-family: 'Nunito Sans', sans-serif; */
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 34px;
+    text-align: center;
+    color: #182F50;
+}
+.app_article__intro-text {
+    padding: 10px 15px;
+    /* font-family: 'Nunito Sans', sans-serif; */
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #182F50;
+}
+.app_article__text-info {
+    padding: 26.5px 15px;
+    /* font-family: 'Nunito Sans', sans-serif; */
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    color: #182F50;
+}
+.app_article__intro-image {
+    margin-top: 30px;
+    width: 100%;
+}
+.app_article__intro-image img{
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+
+.app_article__single {
+    margin: 30px 15px;
+    width: auto;
+}
+.app_article__title {
+    padding: 10px 0;
+    /* font-family: 'Nunito Sans', sans-serif; */
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 25px;
+    color: #182F50;
+}
+.app_article__image {
+    margin: 20px 0 10px;
+    width: 100%;
+}
+.app_article__image img{
+    width: 100% !important;
+    max-width: 100% !important;
+}
+.app_article__image-description {
+    margin: 4px 0 0;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 14px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #CFD0D7;
+}
+
+.app_article__text {
+    padding: 10px 0;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #182F50;
+}
+
+
+.app_article__feedback {
+    margin: 60px 15px 10px;
+}
+
+.app_article__feedback-title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    text-transform: capitalize;
+    color: #182F50;
+}
+.app_article__feedback-text {
+    margin-top: 40px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 21px;
+    text-align: center;
+    color: #182F50;
+}
+.app_article__vote-variants {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.app_article__vote-variant {
+    margin: 0 12px 10px;
+
+    cursor: pointer;
+
+    background: #FCFCFD;
+    border: 1px solid #182F50;
+
+    border-radius: 2px;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 14px;
+    text-transform: capitalize;
+    color: #182F50;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.app_article__vote-variant a {
+    color: #182F50;
+    text-decoration: none;
+    padding: 8px;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.app_article__vote-variant svg {
+    margin-right: 4px;
+}
+/* end base article */
+
+
+/* poll */
+.app_article__poll {
+    padding: 0 15px;
+}
+.app_article__poll-question {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: center;
+    text-transform: capitalize;
+    color: #182F50;
+
+}
+
+.app_article__poll-options {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.app_article__poll-option {
+    margin-bottom: 16px;
+    padding: 12px 24px;
+    width: 100%;
+    height: 38px;
+    border: 1px solid #329EF6;
+    box-sizing: border-box;
+    border-radius: 2px;
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 14px;
+    text-align: center;
+    text-transform: capitalize;
+    color: #329EF6;
+    cursor: pointer;
+}
+.app_article__poll-option:last-child {
+    margin-bottom: 0;
+}
+
+.app_article__poll-results {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.app_article__poll-result {
+    margin-bottom: 16px;
+    padding: 0 14px 0 20px;
+    height: 38px;
+    box-sizing: border-box;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 14px;
+    text-transform: capitalize;
+    background: #F5F5F5;
+    color: #182F50;
+    display: flex;
+    text-align: left;
+    align-items: center;
+}
+.app_article__poll-result:last-child {
+    margin-bottom: 0;
+}
+
+.app_article__poll-my-result {
+    color: #29AAF3 !important;
+    background: rgba(50, 158, 246, 0.1) !important;
+}
+
+.app_article__poll-result-text {
+    white-space: nowrap;
+    /* for discussions */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    margin-right: 4px;
+}
+/* poll end */
+
+/** Custom **/
+.app_article__single .pld-like-dislike-wrap {
+    display: none !important;
+}
