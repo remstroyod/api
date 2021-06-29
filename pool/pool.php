@@ -257,7 +257,7 @@ function show_api_metabox_polls($post){
     <div style="padding-top: 12px">
 
         <select name="_api_polls" id="_api_polls" style="width: 100%;box-sizing: border-box">
-            <option value=""><?= __( 'Select Poll' ) ?></option>
+            <option value="0"><?= __( 'Select Poll' ) ?></option>
 
             <?php foreach( $all_query as $item ) : ?>
                 <?php
@@ -325,13 +325,26 @@ function show_api_metabox_polls_save($post_id) {
     /* OK, its safe for us to save the data now. */
 
     $field = sanitize_text_field( $_POST['_api_polls'] );
-    if( ! empty($field) ) :
-        $polls  = get_post_meta( $post_id, '_api_polls', true );
-        $arr['poll'] = $field;
-        $arr['post'] = $post_id;
-        $arr['ip'] = ( $polls['ip'] ) ? $polls['ip'] : [];
-        update_post_meta( $post_id, '_api_polls', $arr );
+
+    if( $field == 0 ) :
+
+        delete_post_meta( $post_id, '_api_polls' );
+
+    else:
+
+        if( ! empty($field) ) :
+
+            $polls  = get_post_meta( $post_id, '_api_polls', true );
+            $arr['poll'] = $field;
+            $arr['post'] = $post_id;
+            $arr['ip'] = ( $polls['ip'] ) ? $polls['ip'] : [];
+            update_post_meta( $post_id, '_api_polls', $arr );
+
+        endif;
+
     endif;
+
+
 
 }
 

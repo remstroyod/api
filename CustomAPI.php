@@ -169,6 +169,51 @@ function show_api_metabox_settings($post) {
 
 /**
  * Add Metabox
+ * Hide Title
+ */
+add_action('add_meta_boxes', 'api_article_hide_title');
+
+/**
+ * Add Metabox
+ * Hide Title
+ * @api_article_hide_title
+ */
+function api_article_hide_title() {
+
+    /**
+     * Articles Hide Title
+     */
+    add_meta_box(
+        'api_metabox_hide_title',         // $id
+        'Hide Title',         // $title
+        'show_api_metabox_hide_title',    // $callback
+        'post',                         // $page
+        'side',                         // $context
+        'core'                          // $priority
+    );
+
+}
+
+/**
+ * @param $post
+ */
+function show_api_metabox_hide_title($post) {
+    wp_nonce_field( 'api_hide_title_box', 'api_hide_title_box_nonce' );
+
+    $hide_title = get_post_meta( $post->ID, '_api_hide_title', true );
+
+    ?>
+    <div style="padding-top: 12px">
+        <div>
+            <input type="checkbox" name="_api_hide_title" value="1"<?php checked( $hide_title ); ?>/>
+            <span><?= _e( 'Check this box if you want to hide the page title' ) ?></span>
+        </div>
+    </div>
+    <?php
+}
+
+/**
+ * Save Metabox
  * Like and Dislike Activation Save
  */
 add_action( 'save_post', 'api_article_like_dislike_save' );
@@ -207,6 +252,49 @@ function api_article_like_dislike_save($post_id) {
 
     $field = sanitize_text_field( $_POST['_api_like_dislike_enable'] );
     update_post_meta( $post_id, '_api_like_dislike_enable', $field );
+
+}
+
+/**
+ * Save Metabox
+ * Hide Title
+ */
+add_action( 'save_post', 'api_article_hide_title_save' );
+
+/**
+ * @param $post_id
+ */
+function api_article_hide_title_save($post_id) {
+    // Check if our nonce is set.
+    if ( ! isset( $_POST['api_hide_title_box_nonce'] ) )
+        return $post_id;
+
+    $nonce = $_POST['api_hide_title_box_nonce'];
+
+    // Verify that the nonce is valid.
+    if ( ! wp_verify_nonce( $nonce, 'api_hide_title_box' ) )
+        return $post_id;
+
+    // If this is an autosave, our form has not been submitted, so we don't want to do anything.
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+        return $post_id;
+
+    // Check the user's permissions.
+    if ( 'post' == $_POST['post_type'] ) {
+
+        if ( ! current_user_can( 'edit_page', $post_id ) )
+            return $post_id;
+
+    } else {
+
+        if ( ! current_user_can( 'edit_post', $post_id ) )
+            return $post_id;
+    }
+
+    /* OK, its safe for us to save the data now. */
+
+    $field = sanitize_text_field( $_POST['_api_hide_title'] );
+    update_post_meta( $post_id, '_api_hide_title', $field );
 
 }
 

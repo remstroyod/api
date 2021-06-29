@@ -54,15 +54,19 @@ $polls = get_post_meta( get_the_ID(), '_api_polls', true );
         <?php endif; ?>
         -->
         <?php
-        $title = get_the_title();
-        if( ! empty( $title ) && 'Untitled' != $title ) :
-        ?>
-            <!-- Intro Title -->
-            <h2 class="app_article__intro-title">
-                <?= get_the_title() ?>
-            </h2>
-            <!-- End Intro Title -->
+        $hide_title = get_post_meta( get_the_ID(), '_api_hide_title', true );
+        if( ! $hide_title ) :
+            $title = get_the_title();
+            if( ! empty( $title ) && 'Untitled' != $title ) :
+                ?>
+                <!-- Intro Title -->
+                <h2 class="app_article__intro-title">
+                    <?= get_the_title() ?>
+                </h2>
+                <!-- End Intro Title -->
+            <?php endif; ?>
         <?php endif; ?>
+
 
         <?php if( has_excerpt() ) : ?>
             <!-- Intro Text -->
@@ -73,9 +77,9 @@ $polls = get_post_meta( get_the_ID(), '_api_polls', true );
         <?php endif; ?>
 
         <!-- Text Info -->
-        <div class="app_article__text-info">
-            <?= $read_time ?>
-        </div>
+<!--        <div class="app_article__text-info">-->
+<!--            --><?//= $read_time ?>
+<!--        </div>-->
         <!-- End Text Info -->
 
         <?php if( has_post_thumbnail() ) : ?>
@@ -119,7 +123,7 @@ $polls = get_post_meta( get_the_ID(), '_api_polls', true );
             <?php if( ! empty( $title ) ) : ?>
                 <!-- Poll Question -->
                 <h2 class="app_article__poll-question">
-                    <?= get_the_title( $polls ) ?>
+                    <?= get_the_title( $polls['poll'] ) ?>
                 </h2>
                 <!-- End Poll Question -->
             <?php endif; ?>
