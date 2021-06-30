@@ -363,6 +363,7 @@ function api_polls_action() {
     $item   = absint($_POST['post']);
 
     $poll   = get_post_meta( $item, '_api_polls', true );
+    //print_r($poll);exit();
 
     $html   = null;
 
