@@ -299,76 +299,83 @@ function api_article_hide_title_save($post_id) {
 }
 
 /**
- * Fonts
+ * Fonts, JS
+ * @wp_enqueue_scripts
  */
 add_action( 'wp_enqueue_scripts', 'api_template_styles' );
 function api_template_styles() {
 
-    /**
-     * Disable All Css
-     */
-    global $wp_styles;
-    $array = array();
-    foreach ($wp_styles->queue as $handle) :
-        $array[] = $handle;
-    endforeach;
-    wp_dequeue_style($array);
-    wp_deregister_style($array);
+    $api_page = get_query_var( 'article_url' );
 
-    /**
-     * Disable All JS
-     */
-    global $wp_scripts;
-    $array = array();
-    // Runs through the queue scripts
-    foreach ($wp_scripts->queue as $handle) :
-        //print_r($handle);
-        if( ! 'pld-frontend' == $handle ) :
-        $array[] = $handle;
-        endif;
-    endforeach;
+    if( $api_page ) :
 
-    wp_dequeue_script($array);
-    wp_dequeue_script($array);
+        /**
+         * Disable All Css
+         */
+        global $wp_styles;
+        $array = array();
+        foreach ($wp_styles->queue as $handle) :
+            $array[] = $handle;
+        endforeach;
+        wp_dequeue_style($array);
+        wp_deregister_style($array);
 
-    /**
-     * remove_action
-     */
-    remove_action('wp_head', 'wp_generator');
-    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-    remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-    remove_action( 'wp_print_styles', 'print_emoji_styles' );
-    remove_action( 'admin_print_styles', 'print_emoji_styles' );
-    remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
-    remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
-    remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
-    remove_action( 'wp_head', 'wlwmanifest_link' );
+        /**
+         * Disable All JS
+         */
+        global $wp_scripts;
+        $array = array();
+        // Runs through the queue scripts
+        foreach ($wp_scripts->queue as $handle) :
+            //print_r($handle);
+            if( ! 'pld-frontend' == $handle ) :
+                $array[] = $handle;
+            endif;
+        endforeach;
 
-    /**
-     * Enqueue Style
-     * @wp_enqueue_style
-     */
-    wp_enqueue_style( 'api-fonts', 'https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap', [], null );
-    wp_enqueue_style( 'api-styles', get_template_directory_uri() . '/classes/api/assets/css/main.css', [], null );
+        wp_dequeue_script($array);
+        wp_dequeue_script($array);
+
+        /**
+         * remove_action
+         */
+        remove_action('wp_head', 'wp_generator');
+        remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+        remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+        remove_action( 'wp_print_styles', 'print_emoji_styles' );
+        remove_action( 'admin_print_styles', 'print_emoji_styles' );
+        remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+        remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+        remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+        remove_action( 'wp_head', 'wlwmanifest_link' );
+
+        /**
+         * Enqueue Style
+         * @wp_enqueue_style
+         */
+        wp_enqueue_style( 'api-fonts', 'https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap', [], null );
+        wp_enqueue_style( 'api-styles', get_template_directory_uri() . '/classes/api/assets/css/main.css', [], null );
 
 
-    /**
-     * Enqueue Script
-     * @wp_enqueue_script
-     */
-    wp_enqueue_script( 'api-block-ui', get_template_directory_uri() . '/classes/api/assets/js/jquery.blockUI.js', ['jquery'], false, false );
-    wp_enqueue_script( 'api-script', get_template_directory_uri() . '/classes/api/assets/js/api.js', ['jquery'], false, false );
+        /**
+         * Enqueue Script
+         * @wp_enqueue_script
+         */
+        wp_enqueue_script( 'api-block-ui', get_template_directory_uri() . '/classes/api/assets/js/jquery.blockUI.js', ['jquery'], false, false );
+        wp_enqueue_script( 'api-script', get_template_directory_uri() . '/classes/api/assets/js/api.js', ['jquery'], false, false );
 
-    /**
-     *
-     */
-    remove_action('wp_head', '_admin_bar_bump_cb');
+        /**
+         * wp_head
+         */
+        remove_action('wp_head', '_admin_bar_bump_cb');
+
+    endif;
 
 }
 
-
 /**
  * Class CustomAPI
+ * @WP_REST_Controller
  */
 class CustomAPI extends WP_REST_Controller {
 
