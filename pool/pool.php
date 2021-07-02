@@ -361,17 +361,21 @@ function api_polls_action() {
      */
     $id     = absint($_POST['id']);
     $item   = absint($_POST['post']);
+    $readerId   = $_POST['readerId'];
 
     $poll   = get_post_meta( $item, '_api_polls', true );
-    //print_r($poll);exit();
 
     $html   = null;
 
-    if( $poll ) :
+    if( ! empty( $readerId ) ) :
 
-        $ip = api_get_user_IP();
-        $poll['ip'][$id][$ip] = $ip;
-        update_post_meta( $item, '_api_polls', $poll );
+        if( $poll ) :
+
+            $ip = api_get_user_IP();
+            $poll['ip'][$id][$readerId] = $readerId;
+            update_post_meta( $item, '_api_polls', $poll );
+
+        endif;
 
     endif;
 
@@ -416,12 +420,13 @@ function api_get_user_IP() {
  */
 function api_check_polls($answers = []){
 
-    $ip     = api_get_user_IP();
-    $out    = 0;
+    $ip         = api_get_user_IP();
+    $out        = 0;
+    $readerId   = $_GET['readerId'];
 
     if( $answers['ip'] ) :
         foreach ( $answers['ip'] as $key => $item ) :
-            $poll = array_key_exists($ip, $item);
+            $poll = array_key_exists($readerId, $item);
 
             if ($poll) :
                 $out = $key;

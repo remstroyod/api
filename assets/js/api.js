@@ -6,7 +6,8 @@ jQuery(document).ready(function() {
         let $this       = jQuery(this),
             $container  = jQuery('.apiPolls'),
             id          = $this.data('id'),
-            post        = $this.data('post');
+            post        = $this.data('post'),
+            readerId    = $this.data('reader');
 
         jQuery.ajax( {
             beforeSend  :   function(){
@@ -15,9 +16,10 @@ jQuery(document).ready(function() {
 
             },
             data        : {
-                action  : 'api_polls_action',
-                id      : id,
-                post    : post
+                action      : 'api_polls_action',
+                id          : id,
+                post        : post,
+                readerId    : readerId
             },
             dataType    :   'json',
             method      :   'POST',

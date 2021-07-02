@@ -14,7 +14,7 @@ $polls = $args['polls'];
     <?php foreach ( $polls as $key => $answer ) : ?>
         <?php if( ! empty( $answer['answer'] ) ) : ?>
             <!-- Poll option -->
-            <div class="app_article__poll-option apiPollsItem" data-id="<?= $key ?>" data-post="<?= get_the_ID() ?>">
+            <div class="app_article__poll-option apiPollsItem" data-id="<?= $key ?>" data-post="<?= get_the_ID() ?>" data-reader="<?= $_GET['readerId'] ?>">
                 <?= $answer['answer'] ?>
             </div>
             <!-- End Poll option -->

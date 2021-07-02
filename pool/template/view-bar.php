@@ -33,9 +33,16 @@ $answers    = $args['answers'];
 
         ?>
 
-        <?php foreach ( $answers as $key => $item ) : ?>
+        <?php $total_prc = 0; foreach ( $answers as $key => $item ) : ?>
             <?php
             $prc = (array_key_exists( $key, $percent )) ? $percent[$key] : 0;
+
+            $prc = round($prc);
+
+            $total_prc = $total_prc + $prc;
+
+            if( $total_prc > 100 ) $prc = $prc - 1;
+
             ?>
         <!-- Poll Result -->
         <div
@@ -43,7 +50,7 @@ $answers    = $args['answers'];
                 title="<?= $item['answer'] ?> (<?= $prc ?>%)"
                 style="width: <?= $prc ?>%;"
         >
-            <span class="app_article__poll-result-text"><?= $item['answer'] ?></span> (<?= round($prc) ?>%)
+            <span class="app_article__poll-result-text"><?= $item['answer'] ?></span> (<?= $prc ?>%)
         </div>
         <!-- End Poll Result -->
         <?php endforeach; ?>
