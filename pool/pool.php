@@ -55,11 +55,57 @@ function api_pool_register_taxonomies() {
  */
 add_action('edit_form_after_title', 'api_pool_admin_create_section' );
 function api_pool_admin_create_section($post) {
-    global $pagenow;
+    global $pagenow, $wpdb;
 
     if( 'post.php' === $pagenow && 'api_polls' == get_post_type() ) :
 
         $polls = get_post_meta( $post->ID, '_api_polls_answers', true );
+
+        if( $polls ) :
+
+            /**
+             * Results
+             */
+            $query     = "SELECT meta_key, meta_value 
+                          FROM $wpdb->postmeta 
+                          WHERE 1=1";
+
+            $query .= ' AND meta_key = "_api_polls"';
+            $results = $wpdb->get_results( $query );
+
+            if( $results ) :
+
+                $totals = [];
+
+                foreach ( $results as $result ) :
+
+                    $arr = maybe_unserialize($result->meta_value);
+
+                    if( $arr ) :
+
+                        foreach ( $arr['ip'] as $key => $readers ) :
+
+                            if( array_key_exists($totals, $key) ) :
+
+                                $totals[$key] = $totals[$key] + $readers;
+
+                            else:
+
+                                $totals[$key] = $readers;
+
+                            endif;
+
+                        endforeach;
+
+                    endif;
+                    
+                endforeach;
+
+            endif;
+
+        endif;
+
+        //print_r($totals);
 
         ?>
 
@@ -75,7 +121,7 @@ function api_pool_admin_create_section($post) {
                     <?php foreach ($polls as $key => $poll) : ?>
                         <li>
                             <div class="api_pool__list__item">
-                                <span>0</span>
+                                <span><?= (array_key_exists( $key, $totals )) ? count( $totals[$key] ) : 0 ?></span>
                                 <input type="text" value="<?= $poll['answer'] ?>" name="api_poll_answer[<?= $key ?>]">
                                 <a href="#remove" class="button api_poll__remove">x</a>
                             </div>
@@ -253,6 +299,9 @@ function show_api_metabox_polls($post){
         'posts_per_page'    => -1,
 
     ) );
+
+    //print_r($polls);
+
     ?>
     <div style="padding-top: 12px">
 

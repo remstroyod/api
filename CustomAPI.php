@@ -320,6 +320,9 @@ function api_template_styles() {
         wp_dequeue_style($array);
         wp_deregister_style($array);
 
+        wp_dequeue_style('twenty-twenty-one-style');
+        wp_dequeue_style('twenty-twenty-one-print-style');
+
         /**
          * Disable All JS
          */
