@@ -50,6 +50,7 @@ p:last-child {
     background-image: linear-gradient( 140.6deg , #F4FAFC 37.58%, #DAF5FD 84.8%, #D8E5FF 126.91%);
     background-size: 100% 99%;
     background-repeat: no-repeat;
+    padding-bottom: 30px;
 }
 .app_article__intro-title {
     padding: 10px 15px;
@@ -83,12 +84,32 @@ p:last-child {
     color: #182F50;
 }
 .app_article__intro-image {
-    margin-top: 30px;
     width: 100%;
+    position: relative;
 }
 .app_article__intro-image img{
     width: 100% !important;
     max-width: 100% !important;
+    position: relative;
+    z-index: 1;
+}
+.app_article__intro-image span {
+    background: #A5ABEC;
+    border-radius: 2px;
+    height: 21px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 11px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    position: absolute;
+    left: 30px;
+    bottom: -4px;
+    z-index: 3;
+    color: #fff;
+    padding: 0 15px;
 }
 
 
@@ -239,11 +260,11 @@ p:last-child {
     border: 1px solid #329EF6;
     box-sizing: border-box;
     border-radius: 2px;
-    
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    
+
     font-style: normal;
     font-weight: 500;
     font-size: 14px;

@@ -82,16 +82,25 @@ $polls = get_post_meta( get_the_ID(), '_api_polls', true );
 <!--        </div>-->
         <!-- End Text Info -->
 
-        <?php if( has_post_thumbnail() ) : ?>
-            <!-- Intro Image -->
-            <div class="app_article__intro-image">
-                <?= get_the_post_thumbnail( get_the_ID(), 'full' ) ?>
-            </div>
-            <!-- End Intro Image -->
-        <?php endif; ?>
+
 
     </div>
     <!-- End Article > Intro -->
+
+    <?php if( has_post_thumbnail() ) : ?>
+
+        <?php
+        $categories = get_the_category();
+        $cat = ($categories) ? $categories[0]->name : false;
+        ?>
+
+        <!-- Intro Image -->
+        <div class="app_article__intro-image">
+            <?= ($cat) ? '<span>' . $cat . '</span>' : '' ?>
+            <?= get_the_post_thumbnail( get_the_ID(), 'full' ) ?>
+        </div>
+        <!-- End Intro Image -->
+    <?php endif; ?>
 
     <!-- Article > Single -->
     <div class="app_article__single">
