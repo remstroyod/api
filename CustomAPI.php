@@ -442,7 +442,10 @@ class CustomAPI extends WP_REST_Controller {
      */
     function get_items( $request ){
 
-        $data = [];
+        $data = [
+            'Status' => 200,
+            'Response' => [],
+        ];
         $out = [];
 
 
@@ -636,7 +639,7 @@ class CustomAPI extends WP_REST_Controller {
          */
         foreach( $posts as $post ) :
             $response = $this->prepare_item_for_response( $post, $request );
-            $data[] = $this->prepare_response_for_collection( $response );
+            $data['Response'][] = $this->prepare_response_for_collection( $response );
         endforeach;
 
         return $data;
@@ -757,6 +760,19 @@ class CustomAPI extends WP_REST_Controller {
         if ( isset( $schema['properties']['date'] ) )
             $post_data['createdAt'] = get_post_timestamp($post->ID); //get_post( $post->ID )->post_date;
 
+        if ( isset( $schema['properties']['categories'] ) ) :
+            $categories = get_the_category($post->ID);
+            $cat_list = [];
+            if( $categories ) :
+                foreach ( $categories as $cat ) :
+                    if( $cat->name <> 'Uncategorized' ) :
+                        $cat_list[] = $cat->name;
+                    endif;
+                endforeach;
+            endif;
+            $post_data['categories'] = $cat_list;
+        endif;
+
         if ( isset( $schema['properties']['content'] ) )
             $post_data['content'] = apply_filters( 'the_content', $post->post_content, $post );
 
@@ -838,6 +854,10 @@ class CustomAPI extends WP_REST_Controller {
                     'format'      => 'date-time',
                     'context'     => array( 'view', 'edit', 'embed' ),
                 ),
+                'categories' => [
+                    'description' => 'Get Categories by Post',
+                    'type'        => 'object',
+                ],
                 // TODO
                 // []
             ],
