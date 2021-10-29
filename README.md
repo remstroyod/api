@@ -53,7 +53,8 @@ https://domain.com/wp-json/api/v1/articles/?key=value
     "imageUrl": "https://domain.com/wp-content/uploads/2021/06/mirastar-boxes-img-1.jpg",
     "articleUrl": "https://domain.com/app/api/v1/article/article-five/",
     "viewed": false,
-    "createdAt": 1622623317
+    "createdAt": 1622623317,
+    "categories":	[(string), ...]
   },
   {
     "id": "18",
@@ -65,7 +66,8 @@ https://domain.com/wp-json/api/v1/articles/?key=value
     "imageUrl": "https://domain.com/wp-content/uploads/2021/06/mirastar-boxes-img-1.jpg",
     "articleUrl": "https://domain.com/app/api/v1/article/article-seven/",
     "viewed": false,
-    "createdAt": 1622621735
+    "createdAt": 1622621735,
+    "categories":	[(string), ...]
   },
   {
     ...
