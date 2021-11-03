@@ -13,11 +13,22 @@ p:last-child {
     margin-bottom: 0;
 }
 
-
 .app_article {
-    padding: 1px 0 0;
+    padding: 1px 0 40px 0;
+    position: relative;
 }
-
+.app_article::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30%;
+    max-height: 300px;
+    background: linear-gradient(156.79deg, #FFFFFF 38.93%, #DAF5FD 72%, #D8E5FF 109.44%);
+    z-index: -1;
+}
 
 /* base article */
 .app_article__suggesting-reading-tags {
@@ -114,7 +125,7 @@ p:last-child {
 
 
 .app_article__single {
-    margin: 30px 15px;
+    padding: 30px 15px;
     width: auto;
 }
 .app_article__title {
