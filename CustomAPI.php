@@ -442,12 +442,8 @@ class CustomAPI extends WP_REST_Controller {
      */
     function get_items( $request ){
 
-        $data = [
-            'Status' => 200,
-            'Response' => [],
-        ];
+        $data = [];
         $out = [];
-
 
         /**
          * args
@@ -639,7 +635,7 @@ class CustomAPI extends WP_REST_Controller {
          */
         foreach( $posts as $post ) :
             $response = $this->prepare_item_for_response( $post, $request );
-            $data['Response'][] = $this->prepare_response_for_collection( $response );
+            $data[] = $this->prepare_response_for_collection( $response );
         endforeach;
 
         return $data;
