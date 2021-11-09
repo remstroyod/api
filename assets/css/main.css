@@ -104,6 +104,24 @@ p:last-child {
     position: relative;
     z-index: 1;
 }
+.badges__list {
+    position: absolute;
+    left: 15px;
+    bottom: -4px;
+    z-index: 3;
+}
+.badges__list ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.badges__list ul > li:not(:last-child) {
+    margin: 0 5px 0 0;
+}
+
+
 .app_article__intro-image span {
     background: #A5ABEC;
     border-radius: 2px;
@@ -115,10 +133,7 @@ p:last-child {
     line-height: 11px;
     letter-spacing: 0.03em;
     text-transform: uppercase;
-    position: absolute;
-    left: 30px;
-    bottom: -4px;
-    z-index: 3;
+    position: relative;
     color: #fff;
     padding: 0 15px;
 }

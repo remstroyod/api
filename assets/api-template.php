@@ -91,12 +91,22 @@ $polls = get_post_meta( get_the_ID(), '_api_polls', true );
 
         <?php
         $categories = get_the_category();
-        $cat = ($categories) ? $categories[0]->name : false;
+
+        $cat = '';
+        if( $categories ) :
+            $cat .= '<div class="badges__list">';
+            $cat .= '<ul>';
+            foreach ( $categories as $category ) :
+                $cat .= '<li><span>' . $category->name .'</span></li>';
+            endforeach;
+            $cat .= '</ul>';
+            $cat .= '</div>';
+        endif;
         ?>
 
         <!-- Intro Image -->
         <div class="app_article__intro-image">
-            <?= ($cat) ? '<span>' . $cat . '</span>' : '' ?>
+            <?= $cat ?>
             <?= get_the_post_thumbnail( get_the_ID(), 'full' ) ?>
         </div>
         <!-- End Intro Image -->
