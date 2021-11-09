@@ -25,7 +25,8 @@ p:last-child {
     right: 0;
     bottom: 0;
     height: 30%;
-    max-height: 300px;
+    max-height: 500px;
+    min-height: 400px;
     background: linear-gradient(156.79deg, #FFFFFF 38.93%, #DAF5FD 72%, #D8E5FF 109.44%);
     z-index: -1;
 }
@@ -107,7 +108,7 @@ p:last-child {
 .badges__list {
     position: absolute;
     left: 15px;
-    bottom: -4px;
+    bottom: -9px;
     z-index: 3;
 }
 .badges__list ul {
@@ -117,8 +118,11 @@ p:last-child {
     margin: 0;
     padding: 0;
 }
+.badges__list ul > li {
+    margin-bottom: 5px;
+}
 .badges__list ul > li:not(:last-child) {
-    margin: 0 5px 0 0;
+    margin-right: 5px;
 }
 
 
@@ -140,7 +144,7 @@ p:last-child {
 
 
 .app_article__single {
-    padding: 30px 15px;
+    padding: 30px 15px 0 15px;
     width: auto;
 }
 .app_article__title {
@@ -182,7 +186,7 @@ p:last-child {
 
 
 .app_article__feedback {
-    margin: 60px 15px 10px;
+    margin: 45px 15px 0px;
 }
 
 .app_article__feedback-title {
@@ -218,7 +222,7 @@ p:last-child {
     flex-wrap: wrap;
 }
 .app_article__vote-variant {
-    margin: 0 12px 10px;
+    margin: 0 12px 0px;
 
     cursor: pointer;
 
@@ -261,7 +265,7 @@ p:last-child {
 
 /* poll */
 .app_article__poll {
-    padding: 0 15px;
+    padding: 15px 0 0 0;
 }
 .app_article__poll-question {
     font-style: normal;
@@ -345,5 +349,5 @@ p:last-child {
 
 /** Custom **/
 .app_article__single .pld-like-dislike-wrap {
-    display: none !important;
+    /*display: none !important;*/
 }

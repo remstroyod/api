@@ -117,62 +117,64 @@ $polls = get_post_meta( get_the_ID(), '_api_polls', true );
 
         <?= the_content() ?>
 
+        <?php
+        if( $like_dislike ) :
+
+            echo do_shortcode('[posts_like_dislike]');
+
+        endif;
+        ?>
+
+        <?php if( $polls ) : ?>
+
+            <?php
+            $answers    = get_post_meta( $polls['poll'], '_api_polls_answers', true );
+            $title      = get_the_title( $polls['poll'] );
+
+            ?>
+
+            <!-- Article > Poll -->
+            <div class="app_article__poll">
+
+                <?php if( ! empty( $title ) ) : ?>
+                    <!-- Poll Question -->
+                    <h2 class="app_article__poll-question">
+                        <?= get_the_title( $polls['poll'] ) ?>
+                    </h2>
+                    <!-- End Poll Question -->
+                <?php endif; ?>
+
+                <?php if( $answers ) : ?>
+                    <div class="apiPolls">
+                        <?php
+                        $check = null;
+                        $check = api_check_polls($polls);
+
+                        if( !empty($check) ) :
+
+                            get_template_part('classes/api/pool/template/view', 'bar', ['answers' => $answers, 'polls' => $polls, 'my' => $check ]);
+
+                        else:
+
+                            get_template_part('classes/api/pool/template/view', 'polls', ['polls' => $answers ]);
+
+                        endif;
+
+                        ?>
+
+                    </div>
+
+                <?php endif; ?>
+
+            </div>
+            <!-- End Article > Poll -->
+
+        <?php endif; ?>
+
     </div>
     <!-- End Article > Single -->
 
-    <?php
-    if( $like_dislike ) :
 
-        echo do_shortcode('[posts_like_dislike]');
-
-    endif;
-    ?>
-
-    <?php if( $polls ) : ?>
-
-        <?php
-        $answers    = get_post_meta( $polls['poll'], '_api_polls_answers', true );
-        $title      = get_the_title( $polls['poll'] );
-
-        ?>
-
-        <!-- Article > Poll -->
-        <div class="app_article__poll">
-
-            <?php if( ! empty( $title ) ) : ?>
-                <!-- Poll Question -->
-                <h2 class="app_article__poll-question">
-                    <?= get_the_title( $polls['poll'] ) ?>
-                </h2>
-                <!-- End Poll Question -->
-            <?php endif; ?>
-
-            <?php if( $answers ) : ?>
-                <div class="apiPolls">
-                <?php
-                $check = null;
-                $check = api_check_polls($polls);
-
-                if( !empty($check) ) :
-
-                    get_template_part('classes/api/pool/template/view', 'bar', ['answers' => $answers, 'polls' => $polls, 'my' => $check ]);
-
-                else:
-
-                    get_template_part('classes/api/pool/template/view', 'polls', ['polls' => $answers ]);
-
-                endif;
-
-                ?>
-
-                </div>
-
-            <?php endif; ?>
-
-        </div>
-        <!-- End Article > Poll -->
-
-    <?php endif; ?>
 
 </div>
 <!-- End Article -->
